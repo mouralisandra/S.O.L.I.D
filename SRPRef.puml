@@ -1,0 +1,33 @@
+@startuml
+class CarService {
++ String formatCarNames(List<Car>)
++ Car getBestCar(List<Car>)
+}
+
+class CarManager {
++ String getCarsNames()
++ Car getBestCar()
+}
+
+class CarRepository {
+- List<Car> _carsDb
++ Car getCarById(String)
++ List<Car> getAllCars()
+}
+
+class Car {
+- String _id
+- String _model
+- String _brand
++ String getId()
++ String getModel()
++ String getBrand()
+}
+
+CarManager --> CarRepository :Uses
+CarManager --> CarService : Uses
+
+
+
+@enduml
+
