@@ -1,35 +1,40 @@
 package com.directi.training.dip.exercice_refactored;
 
-import java.io.IOException;
-import java.util.Base64;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileReader;
-import java.io.FileWriter;
+import java.io.*;
 
-public class File implements Source{
+public class File implements DataReader, DataWriter{
+    private String path;
+    File(String path){
+        this.path=path;
+    }
+    @Override
+    public String readData() throws IOException {
 
-    public void encode() throws IOException {
-        BufferedReader reader = null;
-        BufferedWriter writer = null;
-        try {
-            reader = new BufferedReader(
-                new FileReader("DIP/src/com/directi/training/dip/exercise/beforeEncryption.txt"));
-            writer = new BufferedWriter(
-                new FileWriter("DIP/src/com/directi/training/dip/exercise/afterEncryption.txt"));
-            String aLine;
-            while ((aLine = reader.readLine()) != null) {
-                String encodedLine = Base64.getEncoder().encodeToString(aLine.getBytes());
-                writer.append(encodedLine);
+        try (BufferedReader reader = new BufferedReader(
+                new FileReader(this.path))) {
+            StringBuilder data = new StringBuilder();
+            String line;
+            while ((line = reader.readLine()) != null) {
+                data.append(line);
             }
+            return data.toString();
+        }
+    }
+
+    @Override
+    public int writeData(String inputString) throws IOException {
+        BufferedWriter writer = null;
+
+        try {
+            writer = new BufferedWriter(
+                    new FileWriter(this.path));
+            writer.append(inputString);
         } finally {
             if (writer != null) {
                 writer.close();
             }
-            if (reader != null) {
-                reader.close();
-            }
+
         }
+        return 0;
     }
-    
 }

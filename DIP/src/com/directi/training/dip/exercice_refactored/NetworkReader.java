@@ -4,13 +4,22 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
-import java.util.Base64;
 
-public class NetworkAndDatabase implements Source{
+public class NetworkReader implements DataReader {
+    private String protocol;
+    private String host;
+    private String file;
 
-    public void encode() throws IOException {
+    public NetworkReader(String protocol, String host , String file) {
+        this.protocol = protocol;
+        this.host = host;
+        this.file = file;
+    }
+
+    @Override
+    public String readData() throws IOException {
         URL url;
-        url = new URL("http", "myfirstappwith.appspot.com", "/index.html");
+        url = new URL(protocol, host, file);
         InputStream in;
         in = url.openStream();
         InputStreamReader reader = new InputStreamReader(in);
@@ -21,10 +30,6 @@ public class NetworkAndDatabase implements Source{
             inputString1.append((char) c);
             c = reader.read();
         }
-        String inputString = inputString1.toString();
-        String encodedString = Base64.getEncoder().encodeToString(inputString.getBytes());
-        MyDatabase database = new MyDatabase();
-        database.write(encodedString);
+        return inputString1.toString();
     }
-    
 }
