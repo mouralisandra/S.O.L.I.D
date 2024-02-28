@@ -1,26 +1,54 @@
 @startuml
-class File {
-+ void encode()
+
+interface DataWriter {
+    + writeData(String inputString): int
 }
+
+interface DataReader {
+    + readData(): String
+}
+
 class MyDatabase {
-- {static} Map<Integer,String> _data
-- {static} int _count
-+ int write(String)
+    - static Map<Integer, String> _data
+    - static int _count
+    + writeData(String inputString): int
 }
+
+class File {
+    - path: String
+    + File(String path)
+    + readData(): String
+    + writeData(String inputString): int
+}
+
+class NetworkReader {
+    - protocol: String
+    - host: String
+    - file: String
+    + NetworkReader(String protocol, String host, String file)
+    + readData(): String
+}
+
 class EncodingModule {
-+ void encode(Source)
+    - dataReader: DataReader
+    - dataWriter: DataWriter
+    + EncodingModule(DataReader dataReader, DataWriter dataWriter)
+    + encode(): void
 }
+
 class EncodingModuleClient {
-+ {static} void main(String[])
-}
-class NetworkAndDatabase {
-+ void encode()
-}
-interface Source {
-+ void encode()
+    + main(String[] args): void
 }
 
+DataReader <|.. File
+DataReader <|.. NetworkReader
 
-Source <|.. File
-Source <|.. NetworkAndDatabase
+DataWriter <|.. MyDatabase
+DataWriter <|.. File
+
+EncodingModule o-- DataReader
+EncodingModule o-- DataWriter
+
+EncodingModuleClient --> EncodingModule
+
 @enduml
