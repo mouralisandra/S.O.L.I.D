@@ -1,26 +1,29 @@
 @startuml
 class TimeResource {
-+ void markSlotFree(int)
-+ void markSlotBusy(int)
-+ int findFreeSlot()
-}
-class SpaceResource {
-+ void markSlotFree(int)
-+ void markSlotBusy(int)
-+ int findFreeSlot()
-}
-class ResourceAllocator {
-- {static} int INVALID_RESOURCE_ID
-+ int allocate(Resource)
-+ void free(Resource,int)
-}
-interface Resource {
-+ void markSlotFree(int)
-+ void markSlotBusy(int)
-+ int findFreeSlot()
+    + void markSlotFree(int)
+    + void markSlotBusy(int)
+    + int findFreeSlot()
 }
 
+class SpaceResource {
+    + void markSlotFree(int)
+    + void markSlotBusy(int)
+    + int findFreeSlot()
+}
+
+class ResourceAllocator {
+    - {static} int INVALID_RESOURCE_ID
+    + int allocate(Resource)
+    + void free(Resource, int)
+}
+
+interface Resource {
+    + void markSlotFree(int)
+    + void markSlotBusy(int)
+    + int findFreeSlot()
+}
 
 Resource <|.. TimeResource
 Resource <|.. SpaceResource
+ResourceAllocator --> Resource
 @enduml
