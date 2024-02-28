@@ -1,0 +1,27 @@
+@startuml
+enum com.directi.training.ocp.example.ShapeType {
++  CIRCLE
++  SQUARE
+}
+class com.directi.training.ocp.example.Circle {
+- double _radius
++ double getRadius()
+}
+class com.directi.training.ocp.example.Square {
+- double _side
++ double getSide()
+}
+class com.directi.training.ocp.example.AreaCalculator {
++ void calculateArea(List<Shape>)
++ double calculateSquareArea(Square)
++ double calculateCircleArea(Circle)
+}
+abstract class com.directi.training.ocp.example.Shape {
+# ShapeType _shapeType
++ ShapeType getType()
+}
+
+
+com.directi.training.ocp.example.Shape <|-- com.directi.training.ocp.example.Circle
+com.directi.training.ocp.example.Shape <|-- com.directi.training.ocp.example.Square
+@enduml

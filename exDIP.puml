@@ -1,0 +1,14 @@
+@startuml
+class com.directi.training.dip.example.Lamp {
+- int _color
++ void turnOn()
++ void turnOff()
++ int getColor()
++ void setColor(int)
+}
+class com.directi.training.dip.example.Button {
+- Lamp _lamp
+- boolean _state
++ void toggle()
+}
+@enduml

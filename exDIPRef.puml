@@ -1,0 +1,29 @@
+@startuml
+class Lamp {
+- int _color
++ void turnOn()
++ void turnOff()
++ int getColor()
++ void setColor(int)
+}
+class Button {
+- boolean _state
+- Equipment _equipment
++ void toggle()
+}
+class Fan {
+- int _speed
++ void turnOn()
++ void turnOff()
++ int getSpeed()
++ void setSpeed(int)
+}
+interface Equipment {
+~ void turnOn()
+~ void turnOff()
+}
+
+
+Equipment <|.. Lamp
+Equipment <|.. Fan
+@enduml

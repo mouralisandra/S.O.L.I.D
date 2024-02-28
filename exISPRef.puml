@@ -1,0 +1,28 @@
+@startuml
+class Human {
++ String work()
++ String eat()
+}
+class MessHall {
+- List<IEater> _eaters
++ void manage()
+}
+interface IWorker {
+~ String work()
+}
+interface IEater {
+~ String eat()
+}
+class Robot {
++ String work()
+}
+class FloorManager {
+- List<IWorker> _workers
++ void manage()
+}
+
+
+IWorker <|.. Human
+IEater <|.. Human
+IWorker <|.. Robot
+@enduml

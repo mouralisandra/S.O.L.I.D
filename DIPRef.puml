@@ -1,0 +1,26 @@
+@startuml
+class File {
++ void encode()
+}
+class MyDatabase {
+- {static} Map<Integer,String> _data
+- {static} int _count
++ int write(String)
+}
+class EncodingModule {
++ void encode(Source)
+}
+class EncodingModuleClient {
++ {static} void main(String[])
+}
+class NetworkAndDatabase {
++ void encode()
+}
+interface Source {
++ void encode()
+}
+
+
+Source <|.. File
+Source <|.. NetworkAndDatabase
+@enduml

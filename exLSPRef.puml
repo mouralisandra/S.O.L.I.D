@@ -1,0 +1,23 @@
+@startuml
+class com.directi.training.lsp.example_refactored.SquareTest {
++ void testSetWidth_Square()
+}
+class com.directi.training.lsp.example_refactored.Square {
+- int _side
++ int getSide()
++ void setSide(int)
++ int getArea()
+}
+class com.directi.training.lsp.example_refactored.RectangleTest {
++ void testSetWidth_Rectangle()
+}
+class com.directi.training.lsp.example_refactored.Rectangle {
+- int _width
+- int _height
++ int getWidth()
++ void setWidth(int)
++ int getHeight()
++ void setHeight(int)
++ int getArea()
+}
+@enduml
